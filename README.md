@@ -130,6 +130,15 @@ user `usbarmory` and password `usbarmory`. NOTE: There is a DHCP server running
 by default. Alternatively the host interface IP address can be statically set
 to 10.0.0.2/24.
 
+# Configuration
+
+As with any system created with debootstrap, once you are logged in you should
+run the following commands to set your default locale and time zone:
+```
+sudo dpkg-reconfigure locales
+sudo dpkg-reconfigure tzdata
+```
+
 # LED feedback
 
 To aid initial testing the base image configures the board LED to reflect CPU
