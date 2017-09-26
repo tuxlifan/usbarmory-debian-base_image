@@ -159,7 +159,7 @@ finalize: ${TARGET_IMG} u-boot-${UBOOT_VER}/u-boot.imx linux-${LINUX_VER}/arch/a
 	cd mxc-scc2-master && sudo make INSTALL_MOD_PATH=../rootfs ARCH=arm KERNEL_SRC=../linux-${LINUX_VER} modules_install
 	sudo rm rootfs/lib/modules/${LINUX_VER}/build
 	sudo rm rootfs/lib/modules/${LINUX_VER}/source
-	echo "setenv bootargs console=ttyGS0,115200 console=\$${console} ip=10.0.0.1::10.0.0.2:255.255.255.0::usb0:none cryptdevice=/dev/mmcblk0p2:rootvault root=/dev/mapper/${VGNAME}-root rootflags=noatime rw rootwait cryptopts=source=/dev/mmcblk0p2,target=rootvault,lvm=${VGNAME}-root; ext2load mmc 0:1 \$${kernel_addr_r} /uImage; ext2load mmc 0:1 \$${ramdisk_addr_r} /uInitrd; ext2load mmc 0:1 \$${fdt_addr_r} /\$${fdtfile}" | sudo tee rootfs/boot/boot.txt
+	echo "setenv bootargs console=ttyGS0,115200 console=\$${console} ip=10.0.0.1::10.0.0.2:255.255.255.0::usb0:none cryptdevice=/dev/mmcblk0p2:rootvault root=/dev/mapper/${VGNAME}-root rootflags=noatime rw rootwait cryptopts=source=/dev/mmcblk0p2,target=rootvault,lvm=${VGNAME}-root; ext2load mmc 0:1 \$${kernel_addr_r} /uImage; ext2load mmc 0:1 \$${ramdisk_addr_r} /uInitrd; ext2load mmc 0:1 \$${fdt_addr_r} /\$${fdtfile}; bootm \$${kernel_addr_r} \$${ramdisk_addr_r} \$${fdt_addr_r}" | sudo tee rootfs/boot/boot.txt
 	sudo /usr/sbin/chroot rootfs /usr/bin/mkimage -A arm -O linux -T script -C none -n "UA boot script" -d /boot/boot.txt /boot/boot.scr
 	sudo cp conf/fix-login.sh rootfs/etc/initramfs-tools/hooks/
 	sudo cp conf/crypt_unlock.sh rootfs/etc/initramfs-tools/hooks/
