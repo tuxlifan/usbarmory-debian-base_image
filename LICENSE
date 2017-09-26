@@ -1,3 +1,5 @@
-This program is distributed in the hope that it will be useful, but WITHOUT ANY
-WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
-PARTICULAR PURPOSE.
+The files in this repository are in the public domain and distributed in the
+hope that they will be useful, but WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+The files conf/fix-login.sh and conf/crypt_unlock.sh were copied and adapted with permission from http://hacksr.blogspot.co.at/2012/05/ssh-unlock-with-fully-encrypted-ubuntu.html.
