@@ -1,1 +1,1 @@
-Makefile.Debian
+Makefile.Devuan
