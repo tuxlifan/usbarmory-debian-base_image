@@ -21,7 +21,11 @@ if [ "x$(git symbolic-ref --short HEAD)" != "xmaster" ]; then
     exit 1
 fi
 
-read -p "Please enter the new version number: " VERSION
+if [ -z $1 ]; then
+    read -p "Please enter the new version number: " VERSION
+else
+    VERSION="$1"
+fi
 LINUX_VER=$(grep LINUX_VER ${MAKEFILE}|cut -d= -f2)
 
 if [ "x${VERSION}" == "x${LINUX_VER}" ]; then
@@ -36,7 +40,7 @@ fi
 sed -i -e '/^LINUX_VER=/s#=.*$#='${VERSION}'#' ${MAKEFILE}
 git add ${MAKEFILE}
 
-if [ 1 -neq $(git diff --staged|grep '^+[^+]'|wc -l) ]; then
+if [ "1" != "$(git diff --staged|grep '^+[^+]'|wc -l)" ]; then
     echo "Something went wrong with 'sed' and 'git add'. More than one line changed! Bailing out!"
     exit 1
 fi
